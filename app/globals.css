@@ -1,3 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
+  }
+
+  body ::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+
+  body ::-webkit-scrollbar-track {
+    border-radius: 8px;
+    box-shadow: none;
+  }
+
+  body ::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.1);
+    border-radius: 8px;
+    box-shadow: none;
+  }
+
+  body ::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(0,0,0,.1);
+  }
+
+  label {
+    @apply block mb-2;
+  }
+
+  input,
+  textarea {
+    @apply 
+      block w-full px-3 py-2 
+      text-sm text-gray-900 rounded 
+      border border-[#EBEBEB]
+      placeholder:text-[#999CA0]
+    ;
+  }
+
+  select {
+    @apply w-full pl-3 pr-6 py-2 border appearance-none rounded
+    text-sm text-gray-900 bg-no-repeat border-[#EBEBEB];
+    background-position: 94%;
+    background-image: url(/img/dropdown-arrow.png);
+    background-size: 16px;
+  }
+
+  button {
+    @apply inline-block px-4 py-1 w-fit cursor-pointer rounded-md;
+  }
+
+  svg {
+    @apply w-6 h-6 cursor-pointer;
+  }
+}
+
+@layer components {
+  .df,
+  .dfc,
+  .dc {
+    @apply flex gap-2;
+  }
+
+  .df,
+  .dc {
+    @apply items-center;
+  }
+
+  .dfc {
+    @apply flex-col;
+  }
+
+  .dc {
+    @apply justify-center;
+  }
+
+  .scroll-y {
+    @apply flex-1 overflow-y-auto;
+  }
+
+  .grid-col-full {
+    grid-column: 1 / -1;
+  }
+
+  .no-scroll-bar::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+  }
+
+  .mini-scroll-bar::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+  }
+
+
+  /* input number hide arrows - Chrome, Safari, Edge, Opera */
+  .no-number-arrows::-webkit-outer-spin-button,
+  .no-number-arrows::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* input number hide arrows - Firefox */
+  .no-number-arrows {
+    -moz-appearance: textfield;
+  }
+}
