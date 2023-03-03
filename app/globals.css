@@ -31,7 +31,7 @@
   }
 
   label {
-    @apply block mb-2;
+    @apply block mb-1;
   }
 
   input,
@@ -39,14 +39,17 @@
     @apply 
       block w-full px-3 py-2 
       text-sm text-gray-900 rounded 
-      border border-[#EBEBEB]
+      border border-[#EBEBEB] focus:outline-none
       placeholder:text-[#999CA0]
     ;
   }
 
   select {
-    @apply w-full pl-3 pr-6 py-2 border appearance-none rounded
-    text-sm text-gray-900 bg-no-repeat border-[#EBEBEB];
+    @apply 
+    w-full pl-3 pr-6 py-2 border appearance-none rounded
+      text-sm text-gray-900 bg-no-repeat border-[#EBEBEB]
+      focus:outline-none
+    ;
     background-position: 94%;
     background-image: url(/img/dropdown-arrow.png);
     background-size: 16px;
@@ -110,5 +113,19 @@
   /* input number hide arrows - Firefox */
   .no-number-arrows {
     -moz-appearance: textfield;
+  }
+
+  .or-dash::before,
+  .or-dash::after {
+    @apply absolute top-1/2 w-[40%] h-px bg-gray-400 -translate-y-1/2;
+    content: "";
+  }
+
+  .or-dash::before {
+    @apply left-4;
+  }
+
+  .or-dash::after {
+    @apply right-4;
   }
 }

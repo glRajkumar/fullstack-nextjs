@@ -1,14 +1,20 @@
 import './globals.css';
+import Nav from './Nav';
 
 type props = {
   children: React.ReactNode
 }
 
-export default function RootLayout({ children }: props) {
+function RootLayout({ children }: props) {
   return (
     <html lang="en">
       <head />
-      <body>{children}</body>
+      <body>
+        <Nav />
+        {children}
+      </body>
     </html>
   )
 }
+
+export default RootLayout
