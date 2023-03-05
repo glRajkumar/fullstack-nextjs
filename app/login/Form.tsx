@@ -1,9 +1,8 @@
 "use client";
 
-import Link from 'next/link';
 import { useState } from 'react';
-import EyeClose from '../../svg/common/eye-close.svg';
-import EyeOpen from '../../svg/common/eye-open.svg';
+import EyeClose from '@/svg/common/eye-close.svg';
+import EyeOpen from '@/svg/common/eye-open.svg';
 
 function Form() {
   const [showPass, setShowPass] = useState(false)

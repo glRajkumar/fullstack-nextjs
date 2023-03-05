@@ -1,16 +1,21 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import './globals.css';
-import Nav from './Nav';
+
+import Nav from '@/comp/Nav';
 
 type props = {
   children: React.ReactNode
 }
 
-function RootLayout({ children }: props) {
+async function RootLayout({ children }: props) {
+  const session = await getServerSession(authOptions)
+
   return (
     <html lang="en">
       <head />
       <body>
-        <Nav />
+        {session?.user && <Nav />}
         {children}
       </body>
     </html>

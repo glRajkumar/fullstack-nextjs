@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+import AuthProvider from "@/comp/Auth/AuthProviderBtns";
 import Form from "./Form";
 
 function page() {
@@ -15,17 +17,7 @@ function page() {
           Or
         </div>
 
-        <div className="dc gap-6">
-          <button className="df py-2 bg-slate-200">
-            <img className="w-6 h-6" src="./img/google.webp" alt="" />
-            Google
-          </button>
-
-          <button className="df py-2 bg-slate-200">
-            <img className="w-6 h-6" src="./img/github.png" alt="" />
-            Github
-          </button>
-        </div>
+        <AuthProvider />
 
         <div className="mt-6 text-sm text-center">
           Already have an account, <Link href="/login" className="text-blue-500 hover:text-blue-700">Log in</Link>
