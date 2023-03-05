@@ -1,6 +1,5 @@
 "use client";
 
-import Link from 'next/link';
 import { useState } from 'react';
 import EyeClose from '../../svg/common/eye-close.svg';
 import EyeOpen from '../../svg/common/eye-open.svg';
@@ -16,9 +15,19 @@ function Form() {
   return (
     <form>
       <div className="mb-4">
-        <label htmlFor="login-email">Email</label>
+        <label htmlFor="signup-name">Name</label>
         <input
-          id="login-email"
+          id="signup-name"
+          type="text"
+          name="name"
+          placeholder="Enter your name"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="signup-email">Email</label>
+        <input
+          id="signup-email"
           type="email"
           name="email"
           placeholder="Enter your email"
@@ -26,9 +35,9 @@ function Form() {
       </div>
 
       <div className="mb-4 relative">
-        <label htmlFor="login-password">Password</label>
+        <label htmlFor="signup-password">Password</label>
         <input
-          id="login-password"
+          id="signup-password"
           type={showPass ? "text" : "password"}
           name="password"
           placeholder="Enter your password"
@@ -50,7 +59,7 @@ function Form() {
         className="block mx-auto mb-6 px-12 bg-slate-900 text-white hover:bg-slate-700 transition-colors"
         type='submit'
       >
-        Login
+        Sign up
       </button>
     </form>
   )
