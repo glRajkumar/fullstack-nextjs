@@ -13,7 +13,10 @@ function AuthProviderBtns() {
         Google
       </button>
 
-      <button className="df py-2 bg-slate-200">
+      <button
+        className="df py-2 bg-slate-200"
+        onClick={() => signIn("github", { callbackUrl: "http://localhost:3000" })}
+      >
         <img className="w-6 h-6" src="./img/github.png" alt="" />
         Github
       </button>
