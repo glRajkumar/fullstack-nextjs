@@ -2,10 +2,13 @@
 
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
+
 import EyeClose from '@/svg/common/eye-close.svg';
 import EyeOpen from '@/svg/common/eye-open.svg';
 
-type dataType = { email: string, password: string }
+type dataType = { name: string, email: string, password: string }
 
 function Form() {
   const { register, formState: { errors }, handleSubmit } = useForm({
@@ -16,14 +19,21 @@ function Form() {
     },
   })
   const [showPass, setShowPass] = useState(false)
+  const router = useRouter()
 
   const updateShowPass = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setShowPass(p => !p)
   }
 
-  const onSubmit: SubmitHandler<dataType> = data => {
-    console.log(data)
+  const onSubmit: SubmitHandler<dataType> = async data => {
+    try {
+      await axios.post("/api/auth/signup", { ...data })
+      router.push('/login')
+
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

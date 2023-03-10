@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { signIn } from 'next-auth/react';
+
 import EyeClose from '@/svg/common/eye-close.svg';
 import EyeOpen from '@/svg/common/eye-open.svg';
 
@@ -15,14 +18,26 @@ function Form() {
     },
   })
   const [showPass, setShowPass] = useState(false)
+  const router = useRouter()
 
   const updateShowPass = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setShowPass(p => !p)
   }
 
-  const onSubmit = (data: dataType) => {
-    console.log(data)
+  const onSubmit = async (data: dataType) => {
+    try {
+      const status = await signIn("credentials", {
+        redirect: false,
+        callbackUrl: "http://localhost:3000",
+        ...data
+      })
+
+      if (status?.ok) router.push("/")
+
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
