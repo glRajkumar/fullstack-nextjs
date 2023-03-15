@@ -1,0 +1,26 @@
+@host = http://localhost:3000/api/posts
+@token = Bearer 
+
+
+### Get
+GET {{host}}
+Authorization: {{token}}
+Content-Type: application/json
+
+
+### Create 
+POST {{host}}
+Authorization: {{token}}
+Content-Type: application/json
+
+
+### Update
+PUT {{host}}
+Authorization: {{token}}
+Content-Type: application/json
+
+
+### Delete
+DELETE {{host}}
+Authorization: {{token}}
+Content-Type: application/json
