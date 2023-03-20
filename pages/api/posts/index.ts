@@ -1,35 +1,50 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import prisma from '@/prisma/client';
 
-async function GET(req: NextApiRequest, res: NextApiResponse) {
+async function getAllPosts(req: NextApiRequest, res: NextApiResponse) {
+  const userId = "clfgbjwh1000290ukuzi5qo4w"
+
   try {
-    return res.json({ name: req.method })
+    const posts = await prisma.post.findMany({
+      where: { userId },
+      orderBy: { createdAt: "desc" },
+    })
+
+    return res.send(posts)
 
   } catch (error) {
     return res.status(500).json({ msg: "Something went wrong" })
   }
 }
 
-async function POST(req: NextApiRequest, res: NextApiResponse) {
+async function createPost(req: NextApiRequest, res: NextApiResponse) {
   try {
-    return res.json({ name: req.method })
+    const { title, userId } = req.body
+
+    const post = await prisma.post.create({
+      data: {
+        title,
+        userId
+      }
+    })
+
+    return res.json({ id: post.id, msg: "Post created successfully" })
 
   } catch (error) {
     return res.status(500).json({ msg: "Something went wrong" })
   }
 }
 
-async function PUT(req: NextApiRequest, res: NextApiResponse) {
+async function updatePost(req: NextApiRequest, res: NextApiResponse) {
   try {
-    return res.json({ name: req.method })
+    const { id, title } = req.body
 
-  } catch (error) {
-    return res.status(500).json({ msg: "Something went wrong" })
-  }
-}
+    await prisma.post.update({
+      where: { id },
+      data: { title }
+    })
 
-async function DELETE(req: NextApiRequest, res: NextApiResponse) {
-  try {
-    return res.json({ name: req.method })
+    return res.json({ msg: "Post updated successfully" })
 
   } catch (error) {
     return res.status(500).json({ msg: "Something went wrong" })
@@ -38,16 +53,14 @@ async function DELETE(req: NextApiRequest, res: NextApiResponse) {
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
-    GET(req, res)
+    return getAllPosts(req, res)
 
   } else if (req.method === "POST") {
-    POST(req, res)
+    return createPost(req, res)
 
   } else if (req.method === "PUT") {
-    PUT(req, res)
+    return updatePost(req, res)
 
-  } else if (req.method === "DELETE") {
-    DELETE(req, res)
   }
 }
 

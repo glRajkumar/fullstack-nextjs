@@ -1,11 +1,15 @@
 @host = http://localhost:3000/api/posts
-@token = Bearer 
+@token = Bearer eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..0BpErPogLPuikX0M.lgVfOLINIT-mEyS8hY2vb-HUCebzuHKy1yLEepr995IfEBwWJWFPcvCV42H7ApxBZAjiRgHQq1__5J3H8r9jngEqYMvzBv3I7mu3XneofUKg5rHXUDGL-rX38JHRQtNiS2hQlOjDClkQIjhq2-s6fCST2Mj2pPTz_zDuKSCUc6J7_2ZQYppGMoupxg2fbfZn-HpGSn3s9B-N2zLDtnYOVMfFKiVcug5Z_mRI7VJ0.vGSfcAjIgEcj6vNWUXuA3w
 
 
-### Get
+### Get all posts
 GET {{host}}
 Authorization: {{token}}
-Content-Type: application/json
+
+
+### Get post by id
+GET {{host}}/clfgd9udj000890uk0g04llly
+Authorization: {{token}}
 
 
 ### Create 
@@ -13,14 +17,23 @@ POST {{host}}
 Authorization: {{token}}
 Content-Type: application/json
 
+{
+  "title": "Title 4",
+  "userId": "clfgbjwh1000290ukuzi5qo4w"
+}
+
 
 ### Update
 PUT {{host}}
 Authorization: {{token}}
 Content-Type: application/json
 
+{
+  "title": "Title 4 edited",
+  "id": "clfgd9udj000890uk0g04llly"
+}
+
 
 ### Delete
-DELETE {{host}}
+DELETE {{host}}/clfgd9udj000890uk0g04llly
 Authorization: {{token}}
-Content-Type: application/json
