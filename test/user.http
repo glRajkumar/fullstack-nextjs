@@ -1,0 +1,22 @@
+@host = http://localhost:3000/api
+
+
+### Create new user
+POST {{host}}/auth/signup
+Content-Type: application/json
+
+{
+  "name": "Raj kumar",
+  "email" : "glraj@gmail.com",
+  "password": "raj@12GL"
+}
+
+
+### login
+POST {{host}}/auth/signin/credentials
+Content-Type: application/json
+
+{
+  "email" : "glraj@gmail.com",
+  "password": "raj@12GL"
+}

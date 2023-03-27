@@ -9,13 +9,14 @@ datasource db {
 }
 
 model Post {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  published Boolean  @default(false)
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  title       String   @db.VarChar(255)
+  description String
+  published   Boolean  @default(false)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
 }
 
 model Account {

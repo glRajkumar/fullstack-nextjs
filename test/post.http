@@ -1,5 +1,5 @@
 @host = http://localhost:3000/api/posts
-@token = Bearer eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..0BpErPogLPuikX0M.lgVfOLINIT-mEyS8hY2vb-HUCebzuHKy1yLEepr995IfEBwWJWFPcvCV42H7ApxBZAjiRgHQq1__5J3H8r9jngEqYMvzBv3I7mu3XneofUKg5rHXUDGL-rX38JHRQtNiS2hQlOjDClkQIjhq2-s6fCST2Mj2pPTz_zDuKSCUc6J7_2ZQYppGMoupxg2fbfZn-HpGSn3s9B-N2zLDtnYOVMfFKiVcug5Z_mRI7VJ0.vGSfcAjIgEcj6vNWUXuA3w
+@token = Bearer eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..0XrleZMiZzTZ0Jy8.GzZo5SxtlEux2K3xF1eCn45K3tsDyfbadwe3yTu20N9ToNyE0lIJ7zW60VQncZVPVoiGUUL3UhUDvEnW7jBHaRUZc4yMxGG_gaSb96H0Hsl8aqx4YHo0j8alrzdugjzhXX7NevHSKzV73eB-n3NR_jRCKht0Jx9IRHtV407cN9X5J5jVaY-yRFTrynCZKHKbEekH4XXUs10WCuws6LIu2qasGTHX_B7UQ4quGqip5NpQ9H7CLF6Wws6B2LSqaP9IAsySS3MSk4iLJuG2_tSYbw.VZB0aMx34U-cGBPH5xIX8Q
 
 
 ### Get all posts
@@ -18,8 +18,8 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-  "title": "Title 4",
-  "userId": "clfgbjwh1000290ukuzi5qo4w"
+  "title": "Title 2",
+  "description": "description description description description"
 }
 
 

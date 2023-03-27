@@ -35,7 +35,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "prisma/client.ts"
+    "prisma/client.ts",
+    "middleware.ts",
+    "types/next-auth.d.ts"
   ],
   "exclude": [
     "node_modules"

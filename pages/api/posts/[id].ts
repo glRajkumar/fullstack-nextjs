@@ -31,12 +31,8 @@ async function deletePost(req: NextApiRequest, res: NextApiResponse) {
 }
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === "GET") {
-    return getPost(req, res)
-
-  } else if (req.method === "DELETE") {
-    return deletePost(req, res)
-  }
+  if (req.method === "GET") return getPost(req, res)
+  if (req.method === "DELETE") return deletePost(req, res)
 }
 
 export default handler
