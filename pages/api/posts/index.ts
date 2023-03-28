@@ -8,6 +8,15 @@ async function getAllPosts(req: NextApiRequest, res: NextApiResponse) {
     const posts = await prisma.post.findMany({
       where: { userId },
       orderBy: { createdAt: "desc" },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            image: true
+          }
+        }
+      },
     })
 
     return res.send(posts)

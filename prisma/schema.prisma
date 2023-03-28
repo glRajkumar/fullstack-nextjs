@@ -9,14 +9,25 @@ datasource db {
 }
 
 model Post {
-  id          String   @id @default(cuid())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  title       String   @db.VarChar(255)
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  title       String    @db.VarChar(255)
   description String
-  published   Boolean  @default(false)
+  published   Boolean   @default(false)
   userId      String
-  user        User     @relation(fields: [userId], references: [id])
+  user        User      @relation(fields: [userId], references: [id])
+  Comment     Comment[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  message   String
+  postId    String
+  userId    String
+  createdAt DateTime @default(now())
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Account {
@@ -56,6 +67,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   Post          Post[]
+  Comment       Comment[]
 }
 
 model VerificationToken {
