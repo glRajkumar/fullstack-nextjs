@@ -1,0 +1,34 @@
+@host = http://localhost:3000/api/comments
+@token = Bearer eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..cbharOenJcWCPH8t.hE1rBlrvSFyip1Szq6RLlnRq1HcJ6eKIFn0QUj95ZaCONPg56YFxaxKQNaXYB3tnB36ilfY49n22PFWRNt_2Dp6YuJ-cNDQUKyaV4wYFRHlmXrODEnHw0g5y9dFBHeL46852W6W4ZNWd-RBygf7iwcY0hrXr5Ig2IRqYNmAemrhYnyJ2FybFixfOq_SbmWOpEWNTOs3aI40U6WloqYDcNOqom-_1y68t-TqH_EK1VANStTnREjREB7Mkfno7cgu11WQwgzr98SNSmFlFtqhY.BdMVllCyXQRRELvJad_bVA
+
+
+### Get all comments of particular post
+GET {{host}}/post/1
+Authorization: {{token}}
+
+
+### create comment
+POST {{host}}
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "title": "Title 1",
+  "": ""
+}
+
+
+### update comment
+PUT {{host}}
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "title": "Title 1",
+  "description": "description description description description"
+}
+
+
+### Delete comment
+DELETE {{host}}/12
+Authorization: {{token}}
