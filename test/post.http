@@ -7,6 +7,11 @@ GET {{host}}
 Authorization: {{token}}
 
 
+### Get all posts of particular user
+GET {{host}}/user
+Authorization: {{token}}
+
+
 ### Get post by id
 GET {{host}}/clfgd9udj000890uk0g04llly
 Authorization: {{token}}

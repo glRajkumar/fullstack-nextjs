@@ -6,12 +6,12 @@ async function updateComment(req: NextApiRequest, res: NextApiResponse) {
   const { message } = req.body
 
   try {
-    const data = await prisma.comment.update({
+    await prisma.comment.update({
       where: { id },
       data: { message }
     })
 
-    return res.json({ msg: "Comment updated successfully", data })
+    return res.json({ msg: "Comment updated successfully" })
 
   } catch (error) {
     return res.status(500).json({ msg: "Something went wrong" })

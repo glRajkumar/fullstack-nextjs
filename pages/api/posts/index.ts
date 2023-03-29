@@ -2,11 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/prisma/client';
 
 async function getAllPosts(req: NextApiRequest, res: NextApiResponse) {
-  const userId = req.headers.userid as string
-
   try {
     const posts = await prisma.post.findMany({
-      where: { userId },
       orderBy: { createdAt: "desc" },
       include: {
         user: {
