@@ -1,7 +1,11 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+
+// global styles
+import 'react-toastify/dist/ReactToastify.css';
 import './globals.css';
 
+import ClientWrapper from "@/comp/Common/ClientWrapper";
 import Nav from '@/comp/Nav';
 
 type props = {
@@ -15,8 +19,10 @@ async function RootLayout({ children }: props) {
     <html lang="en">
       <head />
       <body>
-        {session?.user && <Nav />}
-        {children}
+        <ClientWrapper>
+          {session?.user && <Nav />}
+          {children}
+        </ClientWrapper>
       </body>
     </html>
   )
