@@ -7,6 +7,9 @@ import { compare } from 'bcryptjs';
 import prisma from "@/prisma/client";
 
 export const authOptions: NextAuthOptions = {
+  session: {
+    strategy: "jwt",
+  },
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
@@ -39,7 +42,7 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async jwt({ token, user }) {
-      token.id = user?.id
+      token.id = user?.id || token.sub
       return token
     },
     async session({ session, token }) {
