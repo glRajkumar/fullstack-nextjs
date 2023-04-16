@@ -1,11 +1,13 @@
 "use client"
 
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { getMyPosts } from "@/actions/posts";
 
-import Loader from "../Common/Loader";
+import DeleteModal from "./DeleteModal";
 import PostCard from "./PostCard";
+import Loader from "../Common/Loader";
 
 type props = {
   id: string
@@ -17,10 +19,15 @@ type props = {
 }
 
 function MyPosts() {
+  const [modal, setModal] = useState("")
+
   const { data: posts, isLoading } = useQuery({
     queryKey: ["my-posts"],
     queryFn: getMyPosts
   })
+
+  const onDeleteBtnClk = (id: string) => setModal(id)
+  const closeModal = () => setModal("")
 
   if (isLoading) return <Loader wrapperCls="h-[calc(100vh-112px)]" />
 
@@ -28,13 +35,22 @@ function MyPosts() {
     <>
       {posts?.map((post: props) => (
         <PostCard
-          key={post.id}
           isMine
+          key={post.id}
           title={post.title}
           description={post.description}
           comments={post.comments}
+          onDeleteBtnClk={() => onDeleteBtnClk(post.id)}
         />
       ))}
+
+      {
+        modal &&
+        <DeleteModal
+          id={modal}
+          closeModal={closeModal}
+        />
+      }
     </>
   )
 }

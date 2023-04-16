@@ -22,3 +22,10 @@ export function addPost(data: addPostDataType) {
     data,
   })
 }
+
+export function deletePost(id: string) {
+  return sendApiReq({
+    method: "delete",
+    url: endPoints.posts + `/${id}`,
+  })
+}

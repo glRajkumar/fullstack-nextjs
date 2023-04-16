@@ -1,8 +1,5 @@
 "use client"
 
-import { useState } from "react";
-import DeleteModal from "./DeleteModal";
-
 type props = {
   name?: string
   avatar?: string
@@ -14,15 +11,14 @@ type props = {
     postId: string
     userId: string
   }[]
+  onDeleteBtnClk: () => void
 }
 
 function PostCard({
   avatar, name, isMine,
-  title, description, comments
+  title, description, comments,
+  onDeleteBtnClk
 }: props) {
-  const [modal, setModal] = useState(false)
-
-  const updateModal = () => setModal(p => !p)
   return (
     <>
       <div className="my-6 max-w-2xl mx-auto px-6 py-4 rounded-lg border cursor-pointer hover:shadow-lg">
@@ -38,7 +34,7 @@ function PostCard({
           {
             isMine &&
             <button
-              onClick={updateModal}
+              onClick={onDeleteBtnClk}
               className="ml-auto text-sm font-bold text-red-500"
             >
               Delete
@@ -59,13 +55,6 @@ function PostCard({
           </p>
         </div>
       </div>
-
-      {
-        modal &&
-        <DeleteModal
-          closeModal={updateModal}
-        />
-      }
     </>
   )
 }
