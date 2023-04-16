@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 
 import { getMyPosts } from "@/actions/posts";
 
@@ -21,6 +22,7 @@ type props = {
 function MyPosts() {
   const [modal, setModal] = useState("")
 
+  const { data: user } = useSession()
   const { data: posts, isLoading } = useQuery({
     queryKey: ["my-posts"],
     queryFn: getMyPosts
@@ -36,7 +38,10 @@ function MyPosts() {
       {posts?.map((post: props) => (
         <PostCard
           isMine
+          id={post.id}
           key={post.id}
+          name={user?.user.name}
+          avatar={user?.user.image}
           title={post.title}
           description={post.description}
           comments={post.comments}

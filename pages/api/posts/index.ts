@@ -45,11 +45,11 @@ async function createPost(req: NextApiRequest, res: NextApiResponse) {
 
 async function updatePost(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const { id, title } = req.body
+    const { id, title, description } = req.body
 
     await prisma.post.update({
       where: { id },
-      data: { title }
+      data: { title, description }
     })
 
     return res.json({ msg: "Post updated successfully" })

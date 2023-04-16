@@ -40,6 +40,7 @@ function HomePosts() {
     <>
       {posts?.map((post: props) => (
         <PostCard
+          id={post.id}
           key={post.id}
           name={post.user.name}
           avatar={post.user.image}
