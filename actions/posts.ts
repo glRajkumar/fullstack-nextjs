@@ -3,6 +3,12 @@ import endPoints from '@/utils/endPoints';
 
 export type addPostDataType = { title: string, description: string }
 
+export function getAllPosts() {
+  return sendApiReq({
+    url: endPoints.posts,
+  })
+}
+
 export function getMyPosts() {
   return sendApiReq({
     url: endPoints.posts + "/user",

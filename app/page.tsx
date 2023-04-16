@@ -1,7 +1,10 @@
+import HomePosts from "@/comp/Posts/HomePosts";
 
 function Home() {
   return (
-    <div>Home</div>
+    <section className="p-8">
+      <HomePosts />
+    </section>
   )
 }
 

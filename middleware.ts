@@ -54,6 +54,10 @@ const secret = process.env.NEXTAUTH_SECRET
 export async function middleware(req: NextRequest) {
   const session = await getToken({ req, secret })
 
+  if (req.nextUrl.pathname === "/api/posts" && req.method === "GET") {
+    return NextResponse.next()
+  }
+
   if (session) {
     const headers = new Headers(req.headers)
     headers.set('userid', session.id as string)

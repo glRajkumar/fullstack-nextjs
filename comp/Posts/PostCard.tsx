@@ -25,18 +25,15 @@ function PostCard({
   return (
     <>
       <div className="my-6 max-w-2xl mx-auto px-6 py-4 rounded-lg border cursor-pointer hover:shadow-lg">
-        {
-          !isMine &&
-          <div className="flex items-center gap-2">
-            <img
-              width={24}
-              height={24}
-              src={avatar || "./img/user.png"}
-              alt="avatar"
-            />
-            <h3 className="font-bold text-gray-700">{name}</h3>
-          </div>
-        }
+        <div className="flex items-center gap-2">
+          <img
+            width={24}
+            height={24}
+            src={avatar || "./img/user.png"}
+            alt="avatar"
+          />
+          <h3 className="font-bold text-gray-700">{name}</h3>
+        </div>
 
         <div className="my-2">
           <p className="df justify-between font-semibold">
