@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 import { getMyPosts } from "@/actions/posts";
 
@@ -16,11 +17,11 @@ type props = {
   name: string
   title: string
   description: string
-  comments?: [],
 }
 
 function MyPosts() {
   const [modal, setModal] = useState("")
+  const router = useRouter()
 
   const { data: user } = useSession()
   const { data: posts, isLoading } = useQuery({
@@ -44,8 +45,8 @@ function MyPosts() {
           avatar={user?.user.image}
           title={post.title}
           description={post.description}
-          comments={post.comments}
           onDeleteBtnClk={() => onDeleteBtnClk(post.id)}
+          onCardClk={() => router.push(`/post/${post.id}`)}
         />
       ))}
 

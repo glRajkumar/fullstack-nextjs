@@ -7,6 +7,15 @@ async function getPost(req: NextApiRequest, res: NextApiResponse) {
   try {
     const posts = await prisma.post.findFirst({
       where: { id },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            image: true
+          }
+        }
+      }
     })
 
     return res.send(posts)

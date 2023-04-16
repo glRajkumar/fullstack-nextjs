@@ -1,8 +1,8 @@
 "use client"
 
-import { deletePost } from "@/actions/posts"
-import { successNotify } from "@/helpers/toastifyHlp"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { successNotify } from "@/helpers/toastifyHlp";
+import { deletePost } from "@/actions/posts";
 
 type props = {
   id: string

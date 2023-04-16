@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import Link from "next/link";
 
 type props = {
   id: string
@@ -9,21 +9,23 @@ type props = {
   title: string
   description: string
   isMine: boolean
-  comments?: {
-    id: string
-    postId: string
-    userId: string
-  }[]
+  wrapperCls?: string
   onDeleteBtnClk: () => void
+  onCardClk: () => void
 }
 
 function PostCard({
   id, avatar, name, isMine,
-  title, description, comments,
-  onDeleteBtnClk
+  title, description,
+  onDeleteBtnClk = () => { },
+  onCardClk = () => { },
+  wrapperCls = "my-6 max-w-2xl mx-auto px-6 py-4 rounded-lg border cursor-pointer hover:shadow-lg"
 }: props) {
   return (
-    <div className="my-6 max-w-2xl mx-auto px-6 py-4 rounded-lg border cursor-pointer hover:shadow-lg">
+    <div
+      className={wrapperCls}
+      onClick={onCardClk}
+    >
       <div className="flex items-center gap-2">
         <img
           width={24}
@@ -58,12 +60,6 @@ function PostCard({
           {title}
         </p>
         <p>{description}</p>
-      </div>
-
-      <div className="flex items-center gap-4">
-        <p className="text-sm font-bold text-gray-700">
-          {comments?.length} Comments
-        </p>
       </div>
     </div>
   )

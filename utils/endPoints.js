@@ -4,6 +4,7 @@ export const root = {
 
 const endPoints = {
   posts: "/posts",
+  comments: "/comments",
 }
 
 export default endPoints
