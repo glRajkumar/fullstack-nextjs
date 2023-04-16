@@ -7,7 +7,7 @@ function Nav() {
   const { status } = useSession()
 
   return (
-    <nav className="df px-6 py-2 shadow sticky top-0 z-1 bg-white">
+    <nav className="df gap-4 px-6 py-2 shadow sticky top-0 z-1 bg-white">
       <Link href="/" className="mr-auto text-2xl font-medium">
         Post-It
       </Link>
@@ -31,6 +31,12 @@ function Nav() {
           </>
             :
             <>
+              <Link
+                href="/my-posts"
+                className="text-sm font-medium hover:text-blue-600"
+              >
+                My Posts
+              </Link>
               <Link
                 href="/create-post"
                 className="text-sm font-medium hover:text-blue-600"
