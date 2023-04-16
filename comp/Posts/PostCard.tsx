@@ -20,8 +20,9 @@ function PostCard({
   avatar, name, isMine,
   title, description, comments
 }: props) {
-  const [toggle, setToggle] = useState(false)
+  const [modal, setModal] = useState(false)
 
+  const updateModal = () => setModal(p => !p)
   return (
     <>
       <div className="my-6 max-w-2xl mx-auto px-6 py-4 rounded-lg border cursor-pointer hover:shadow-lg">
@@ -33,23 +34,21 @@ function PostCard({
             alt="avatar"
           />
           <h3 className="font-bold text-gray-700">{name}</h3>
+
+          {
+            isMine &&
+            <button
+              onClick={updateModal}
+              className="ml-auto text-sm font-bold text-red-500"
+            >
+              Delete
+            </button>
+          }
         </div>
 
         <div className="my-2">
-          <p className="df justify-between font-semibold">
+          <p className="font-semibold">
             {title}
-            {
-              isMine &&
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  setToggle(true)
-                }}
-                className="text-sm font-bold text-red-500"
-              >
-                Delete
-              </button>
-            }
           </p>
           <p>{description}</p>
         </div>
@@ -62,10 +61,9 @@ function PostCard({
       </div>
 
       {
-        toggle &&
+        modal &&
         <DeleteModal
-          deletePost={() => { }}
-          setToggle={setToggle}
+          closeModal={updateModal}
         />
       }
     </>

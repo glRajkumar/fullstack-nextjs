@@ -16,11 +16,11 @@ function AddPost() {
   })
   const router = useRouter()
 
-  const { mutate } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: addPost,
     onSuccess: () => {
       successNotify("Post created successfully")
-      router.push("/")
+      router.push("/my-posts")
     }
   })
 
@@ -73,8 +73,9 @@ function AddPost() {
       </div>
 
       <button
-        className="text-sm bg-teal-600 text-white py-2 px-6 rounded-xl disabled:opacity-25"
         type="submit"
+        disabled={isLoading}
+        className="text-sm bg-teal-600 text-white py-2 px-6 rounded-xl disabled:opacity-60"
       >
         Create post
       </button>

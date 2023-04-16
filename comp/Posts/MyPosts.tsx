@@ -1,9 +1,11 @@
 "use client"
 
 import { useQuery } from "@tanstack/react-query";
-import PostCard from "./PostCard";
 
 import { getMyPosts } from "@/actions/posts";
+
+import Loader from "../Common/Loader";
+import PostCard from "./PostCard";
 
 type props = {
   id: string
@@ -15,13 +17,15 @@ type props = {
 }
 
 function MyPosts() {
-  const { data: posts } = useQuery({
-    queryKey: ["posts"],
+  const { data: posts, isLoading } = useQuery({
+    queryKey: ["my-posts"],
     queryFn: getMyPosts
   })
 
+  if (isLoading) return <Loader wrapperCls="h-[calc(100vh-112px)]" />
+
   return (
-    <div>
+    <>
       {posts?.map((post: props) => (
         <PostCard
           key={post.id}
@@ -31,7 +35,7 @@ function MyPosts() {
           comments={post.comments}
         />
       ))}
-    </div>
+    </>
   )
 }
 
