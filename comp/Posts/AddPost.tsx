@@ -1,42 +1,83 @@
 "use client"
 
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+
+import { addPost, addPostDataType } from "@/actions/posts";
+import { successNotify } from "@/helpers/toastifyHlp";
 
 function AddPost() {
-  const [isDisabled, setIsDisabled] = useState(false)
-  const [title, setTitle] = useState("")
+  const { register, formState: { errors }, handleSubmit } = useForm({
+    defaultValues: {
+      title: "",
+      description: "",
+    }
+  })
+  const router = useRouter()
 
-  const submitPost = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsDisabled(true)
-  }
+  const { mutate } = useMutation({
+    mutationFn: addPost,
+    onSuccess: () => {
+      successNotify("Post created successfully")
+      router.push("/")
+    }
+  })
+
+  const submitPost = (data: addPostDataType) => mutate(data)
 
   return (
-    <form onSubmit={submitPost} className="bg-white my-8 p-8 rounded-md">
-      <div className="flex flex-col my-4">
-        <textarea
-          name="title"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-          placeholder="What's on your mind?"
-          rows={6}
-          className="p-4 text-lg rounded-md my-2  bg-gray-200"
-        />
-      </div>
-
-      <div className="flex items-center justify-between gap-2">
-        <p className={`font-bold text-sm ${title.length > 300 ? "text-red-700" : "text-gray-700"}`}>
-          {title.length}/300
-        </p>
-
-        <button
-          disabled={isDisabled}
-          className="text-sm bg-teal-600 text-white py-2 px-6 rounded-xl disabled:opacity-25"
-          type="submit"
+    <form
+      onSubmit={handleSubmit(submitPost)}
+      className="bg-white my-8 p-8 max-w-lg mx-auto rounded-md"
+    >
+      <div className="mb-4">
+        <label
+          htmlFor="create-Title"
+          className="text-sm font-medium"
         >
-          Create post
-        </button>
+          Title
+        </label>
+        <input
+          id="create-Title"
+          type="text"
+          {...register("title", {
+            required: "Title is required"
+          })}
+        />
+        {
+          errors.title &&
+          <p className="mt-0.5 text-[13px] font-medium text-red-400">{errors.title.message}</p>
+        }
       </div>
+
+      <div className="mb-4">
+        <label
+          htmlFor="create-Description"
+          className="text-sm font-medium"
+        >
+          Description
+        </label>
+        <textarea
+          id="create-Description"
+          rows={6}
+          placeholder="What's on your mind?"
+          {...register("description", {
+            required: "Description is required",
+          })}
+        />
+        {
+          errors.description &&
+          <p className="mt-0.5 text-[13px] font-medium text-red-400">{errors.description.message}</p>
+        }
+      </div>
+
+      <button
+        className="text-sm bg-teal-600 text-white py-2 px-6 rounded-xl disabled:opacity-25"
+        type="submit"
+      >
+        Create post
+      </button>
     </form>
   )
 }

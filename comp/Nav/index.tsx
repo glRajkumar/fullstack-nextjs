@@ -30,12 +30,20 @@ function Nav() {
             </Link>
           </>
             :
-            <button
-              className="text-sm bg-slate-900 text-white hover:bg-slate-700 transition-colors"
-              onClick={() => signOut()}
-            >
-              Sign out
-            </button>
+            <>
+              <Link
+                href="/create-post"
+                className="text-sm font-medium hover:text-blue-600"
+              >
+                Create Post
+              </Link>
+              <button
+                className="text-sm bg-slate-900 text-white hover:bg-slate-700 transition-colors"
+                onClick={() => signOut()}
+              >
+                Sign out
+              </button>
+            </>
         )
       }
     </nav>
