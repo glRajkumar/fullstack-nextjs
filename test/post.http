@@ -1,14 +1,14 @@
 @host = http://localhost:3000/api/posts
-@token = Bearer eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..cbharOenJcWCPH8t.hE1rBlrvSFyip1Szq6RLlnRq1HcJ6eKIFn0QUj95ZaCONPg56YFxaxKQNaXYB3tnB36ilfY49n22PFWRNt_2Dp6YuJ-cNDQUKyaV4wYFRHlmXrODEnHw0g5y9dFBHeL46852W6W4ZNWd-RBygf7iwcY0hrXr5Ig2IRqYNmAemrhYnyJ2FybFixfOq_SbmWOpEWNTOs3aI40U6WloqYDcNOqom-_1y68t-TqH_EK1VANStTnREjREB7Mkfno7cgu11WQwgzr98SNSmFlFtqhY.BdMVllCyXQRRELvJad_bVA
+@token = Bearer eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..5Tt9rccOaD2jMjQL.Ge3p8q9u-wvUCZ2H_79Ow28bKuyUsfrL-GmV_YBCnQ4TIGpwQiXnN_zJZddEUXTFMwRslGw6tOUUTu9vBPyMwaUKgWDhvtYoPJx7E3TeF6vM_MbFTUyFM36LYES7rNelpeO5LRjrs3K27obJwyDCDEN_k1O2NkIXa4A8qZHrTo23Ai-_dc80e_ydhhx-pV0cralJONeqDEJ9DMll-r_M5hBtXm3iNPlu4bBlNGM8vqIVb0Y6ULaPy2nCULEE2WBWnTkvBviQdNES86Ux5K3d.XRR5soT7O8eLLL-xYRH4vQ
 
 
 ### Get all posts
-GET {{host}}
+GET {{host}}?skip=3&limit=5
 Authorization: {{token}}
 
 
 ### Get all posts of particular user
-GET {{host}}/user
+GET {{host}}/user?skip=3&limit=5
 Authorization: {{token}}
 
 
@@ -23,7 +23,7 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-  "title": "Title 1",
+  "title": "Title 15",
   "description": "description description description description"
 }
 

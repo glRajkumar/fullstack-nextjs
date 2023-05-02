@@ -3,9 +3,12 @@ import prisma from '@/prisma/client';
 
 async function getAllPosts(req: NextApiRequest, res: NextApiResponse) {
   const userId = req.headers.userid as string
+  const { skip, limit } = req.query
 
   try {
     const posts = await prisma.post.findMany({
+      skip: Number(skip),
+      take: Number(limit),
       where: { userId },
       orderBy: { createdAt: "desc" },
     })
