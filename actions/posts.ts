@@ -4,13 +4,17 @@ import endPoints from '@/utils/endPoints';
 export type addPostDataType = { title: string, description: string }
 export type editPostDataType = { title: string, description: string, id: string }
 
-export function getAllPosts() {
+export function getAllPosts({ pageParam: skip = 0 }) {
+  // to prevent react query call on refocus. skip will be true if all records fetched
+  if (typeof skip === "boolean") return []
   return sendApiReq({
     url: endPoints.posts,
+    params: { skip },
   })
 }
 
 export function getMyPosts({ pageParam: skip = 0 }) {
+  if (typeof skip === "boolean") return []
   return sendApiReq({
     url: endPoints.posts + "/user",
     params: { skip },

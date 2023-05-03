@@ -28,6 +28,7 @@ function MyPosts() {
 
   const {
     isLoading,
+    hasNextPage,
     fetchNextPage,
   } = useInfiniteQuery({
     queryKey: ["my-posts"],
@@ -43,7 +44,7 @@ function MyPosts() {
 
   return (
     <>
-      {posts?.map((post: props) => (
+      {posts?.map(post => (
         <PostCard
           isMine
           id={post.id}
@@ -57,12 +58,15 @@ function MyPosts() {
         />
       ))}
 
-      <button
-        onClick={() => fetchNextPage({ pageParam: posts.length })}
-        className="px-4 py-2 border shadow"
-      >
-        More
-      </button>
+      {
+        hasNextPage &&
+        <button
+          onClick={() => fetchNextPage({ pageParam: posts.length })}
+          className="block px-4 py-2 mx-auto border shadow"
+        >
+          More
+        </button>
+      }
 
       {
         modal &&
