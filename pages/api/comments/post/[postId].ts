@@ -3,12 +3,14 @@ import prisma from '@/prisma/client';
 
 async function getAllComments(req: NextApiRequest, res: NextApiResponse) {
   const { postId } = req.query as { postId: string }
+  const { skip, limit = 10 } = req.query
 
   try {
     const comments = await prisma.comment.findMany({
-      where: {
-        postId
-      },
+      skip: Number(skip),
+      take: Number(limit),
+      where: { postId },
+      orderBy: { createdAt: "desc" },
       include: {
         user: {
           select: {
@@ -16,7 +18,7 @@ async function getAllComments(req: NextApiRequest, res: NextApiResponse) {
             image: true
           }
         }
-      }
+      },
     })
 
     return res.send(comments)

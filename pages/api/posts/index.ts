@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/prisma/client';
 
 async function getAllPosts(req: NextApiRequest, res: NextApiResponse) {
-  const { skip, limit } = req.query
+  const { skip, limit = 10 } = req.query
 
   try {
     const posts = await prisma.post.findMany({
