@@ -10,9 +10,10 @@ export function getAllPosts() {
   })
 }
 
-export function getMyPosts() {
+export function getMyPosts({ pageParam: skip = 0 }) {
   return sendApiReq({
     url: endPoints.posts + "/user",
+    params: { skip },
   })
 }
 

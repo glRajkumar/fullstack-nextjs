@@ -3,17 +3,21 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
 import { root } from './endPoints';
 
-type SendApiReqParams = {
+// type SendApiReqParams = {
+//   isAuthendicated?: boolean;
+//   headers?: Record<string, string>;
+//   method?: AxiosRequestConfig['method'];
+//   url?: string;
+//   data?: unknown;
+// };
+
+type SendApiReqParams = AxiosRequestConfig & {
   isAuthendicated?: boolean;
-  headers?: Record<string, string>;
-  method?: AxiosRequestConfig['method'];
-  url?: string;
-  data?: unknown;
 };
 
 type CustomError = Error & { status?: number };
 
-const requestIntercepter = (instance: AxiosInstance, isAuthendicated: boolean, headers: Record<string, string>): void => {
+const requestIntercepter = (instance: AxiosInstance, isAuthendicated: boolean, headers: AxiosRequestConfig["headers"]): void => {
   instance.interceptors.request.use(
     function (config) {
       if (isAuthendicated) {

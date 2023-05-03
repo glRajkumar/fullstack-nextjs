@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -20,13 +20,20 @@ type props = {
 }
 
 function MyPosts() {
+  const [posts, setPosts] = useState<props[]>([])
   const [modal, setModal] = useState("")
   const router = useRouter()
 
   const { data: user } = useSession()
-  const { data: posts, isLoading } = useQuery({
+
+  const {
+    isLoading,
+    fetchNextPage,
+  } = useInfiniteQuery({
     queryKey: ["my-posts"],
-    queryFn: getMyPosts
+    queryFn: getMyPosts,
+    getNextPageParam: (lastPage) => lastPage.length === 10,
+    onSuccess: (data) => setPosts(data.pages.flat() as props[])
   })
 
   const onDeleteBtnClk = (id: string) => setModal(id)
@@ -49,6 +56,13 @@ function MyPosts() {
           onCardClk={() => router.push(`/post/${post.id}`)}
         />
       ))}
+
+      <button
+        onClick={() => fetchNextPage({ pageParam: posts.length })}
+        className="px-4 py-2 border shadow"
+      >
+        More
+      </button>
 
       {
         modal &&
