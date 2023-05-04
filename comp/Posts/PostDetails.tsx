@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { useMutation, useQueries, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 
@@ -25,30 +25,33 @@ interface commentType {
 }
 
 function PostDetails() {
+  const [comments, setComments] = useState<commentType[]>([])
   const [message, setMessage] = useState("")
   const [modal, setModal] = useState(false)
+
   const { data: user } = useSession()
+
   const queryClient = useQueryClient()
   const pathName = usePathname()
 
   const id = pathName?.split("/")[2] || ""
 
-  const [
-    { isLoading: isLoading1, data: post },
-    { isLoading: isLoading2, data: comments },
-  ] = useQueries({
-    queries: [
-      {
-        queryKey: ["post", id],
-        queryFn: () => getPostById(id),
-        enabled: !!id,
-      },
-      {
-        queryKey: ["comments", id],
-        queryFn: () => getAllCommentsInPost(id),
-        enabled: !!id,
-      }
-    ]
+  const { isLoading: isLoading1, data: post } = useQuery({
+    queryKey: ["post", id],
+    queryFn: () => getPostById(id),
+    enabled: !!id,
+  })
+
+  const {
+    isLoading: isLoading2,
+    hasNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery({
+    enabled: !!id,
+    queryKey: ["comments", id],
+    queryFn: ({ pageParam }) => getAllCommentsInPost({ id, pageParam }),
+    getNextPageParam: (lastPage) => lastPage.length === 10,
+    onSuccess: (data) => setComments(data.pages.flat()),
   })
 
   const { mutate, isLoading: isComenting } = useMutation({
@@ -89,13 +92,13 @@ function PostDetails() {
 
       <div className="my-4 px-8 overflow-y-auto">
         {
-          comments.map((c: commentType) => (
+          comments.map(c => (
             <div key={c.id} className="mb-2 text-sm">
               <div className="df mb-0.5">
                 <img
                   width={24}
                   height={24}
-                  src={c.user.image || "./img/user.png"}
+                  src={c.user.image || "/img/user.png"}
                   alt="avater"
                 />
                 <p>{c.user.name}</p>
@@ -106,6 +109,16 @@ function PostDetails() {
               </div>
             </div>
           ))
+        }
+
+        {
+          hasNextPage &&
+          <button
+            onClick={() => fetchNextPage({ pageParam: comments.length })}
+            className="block px-4 py-2 mx-auto border shadow"
+          >
+            More
+          </button>
         }
       </div>
 

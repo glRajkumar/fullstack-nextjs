@@ -30,7 +30,7 @@ function PostCard({
         <img
           width={24}
           height={24}
-          src={avatar || "./img/user.png"}
+          src={avatar || "/img/user.png"}
           alt="avatar"
         />
         <h3 className="mr-auto font-bold text-gray-700">{name}</h3>
