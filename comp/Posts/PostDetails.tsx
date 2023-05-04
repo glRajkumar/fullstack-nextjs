@@ -10,6 +10,7 @@ import { successNotify } from "@/helpers/toastifyHlp";
 import { getPostById } from "@/actions/posts";
 
 import DeleteModal from "./DeleteModal";
+import LoadMore from "../Common/LoadMore";
 import PostCard from "./PostCard";
 import Loader from "../Common/Loader";
 
@@ -44,6 +45,7 @@ function PostDetails() {
 
   const {
     isLoading: isLoading2,
+    isFetching,
     hasNextPage,
     fetchNextPage,
   } = useInfiniteQuery({
@@ -112,13 +114,15 @@ function PostDetails() {
         }
 
         {
-          hasNextPage &&
-          <button
-            onClick={() => fetchNextPage({ pageParam: comments.length })}
-            className="block px-4 py-2 mx-auto border shadow"
-          >
-            More
-          </button>
+          !isLoading2 && hasNextPage && !isFetching &&
+          <LoadMore
+            fn={() => fetchNextPage({ pageParam: comments.length })}
+          />
+        }
+
+        {
+          isFetching &&
+          <Loader loaderCls=" w" />
         }
       </div>
 

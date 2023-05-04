@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { getAllPosts } from "@/actions/posts";
 
 import DeleteModal from "./DeleteModal";
+import LoadMore from "../Common/LoadMore";
 import PostCard from "./PostCard";
 import Loader from "../Common/Loader";
 
@@ -32,6 +33,7 @@ function HomePosts() {
   const {
     isLoading,
     hasNextPage,
+    isFetching,
     fetchNextPage,
   } = useInfiniteQuery({
     queryKey: ["posts"],
@@ -62,13 +64,15 @@ function HomePosts() {
       ))}
 
       {
-        hasNextPage &&
-        <button
-          onClick={() => fetchNextPage({ pageParam: posts.length })}
-          className="block px-4 py-2 mx-auto border shadow"
-        >
-          More
-        </button>
+        !isLoading && hasNextPage && !isFetching &&
+        <LoadMore
+          fn={() => fetchNextPage({ pageParam: posts.length })}
+        />
+      }
+
+      {
+        isFetching &&
+        <Loader loaderCls=" w" />
       }
 
       {
