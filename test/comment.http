@@ -3,7 +3,7 @@
 
 
 ### Get all comments of particular post
-GET {{host}}/post/clh6cjrwy000p90dkplkr57qx?skip=0
+GET {{host}}/post/clh6ck5hm000v90dkywz4lu1k?skip=0
 Authorization: {{token}}
 
 
@@ -13,13 +13,13 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-  "message": "comment 20",
-  "postId": "clh6cjrwy000p90dkplkr57qx"
+  "message": "comment 23",
+  "postId": "clh6ck5hm000v90dkywz4lu1k"
 }
 
 
 ### update comment
-PUT {{host}}/clft719i5000190ywsu7vko8c
+PUT {{host}}/clhbst6gl000190z8r1ojvq0p
 Authorization: {{token}}
 Content-Type: application/json
 
@@ -29,5 +29,5 @@ Content-Type: application/json
 
 
 ### Delete comment
-DELETE {{host}}/clft71nna000390ywk6t06gyy
+DELETE {{host}}/clhbst6gl000190z8r1ojvq0p
 Authorization: {{token}}

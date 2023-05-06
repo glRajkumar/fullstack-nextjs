@@ -3,17 +3,17 @@
 
 
 ### Get all posts
-GET {{host}}?skip=3
+GET {{host}}?skip=0
 Authorization: {{token}}
 
 
 ### Get all posts of particular user
-GET {{host}}/user?skip=3
+GET {{host}}/user?skip=0
 Authorization: {{token}}
 
 
 ### Get post by id
-GET {{host}}/clfgd9udj000890uk0g04llly
+GET {{host}}/clh6cjin1000l90dkh2r0m561
 Authorization: {{token}}
 
 
@@ -34,11 +34,11 @@ Authorization: {{token}}
 Content-Type: application/json
 
 {
-  "title": "Title 4 edited",
-  "id": "clfgd9udj000890uk0g04llly"
+  "title": "Title 10 edited",
+  "id": "clh6cjin1000l90dkh2r0m561"
 }
 
 
 ### Delete
-DELETE {{host}}/clfgd9udj000890uk0g04llly
+DELETE {{host}}/clh6cjin1000l90dkh2r0m561
 Authorization: {{token}}
