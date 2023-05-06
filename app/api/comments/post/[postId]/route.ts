@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/prisma/client';
 
+import { getQueries } from '../../../utils';
+
 type paramsType = { params: { postId: string } }
 
 export async function GET(req: Request, { params }: paramsType) {
-  const { searchParams } = new URL(req.url)
+  const { skip, limit = 10 } = getQueries(req, ["limit", "skip"])
   const { postId } = params
-  const limit = searchParams.get("limit") || 10
-  const skip = searchParams.get("skip")
 
   try {
     const comments = await prisma.comment.findMany({

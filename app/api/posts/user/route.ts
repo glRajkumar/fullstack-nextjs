@@ -2,11 +2,10 @@ import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import prisma from '@/prisma/client';
 
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url)
-  const limit = searchParams.get("limit") || 10
-  const skip = searchParams.get("skip")
+import { getQueries } from '../../utils';
 
+export async function GET(req: Request) {
+  const { skip, limit = 10 } = getQueries(req, ["limit", "skip"])
   const userId = headers().get("userid") as string
 
   try {
